@@ -1,0 +1,161 @@
+\documentclass[paper=a4, % Seitenformat
+         fontsize=10pt,  % Schriftgröße
+         oneside,        % einseitig
+         headsepline,    % Trennlinie für die Kopfzeile
+         notitlepage     % keine extra Titelseite
+]{scrartcl}              % KOMA-Script Article
+%------------------------------------------------------------------------
+
+\usepackage[automark]{scrlayer-scrpage}  % Seiten-Stil für scrartcl
+\usepackage[top=25mm]{geometry}  		% Oberer Rand 25mm Einrückung
+\usepackage[utf8]{inputenc}              % Eingabekodierungen
+\usepackage[T1]{fontenc}                 % Eingabekodierungen
+\usepackage[english,ngerman]{babel}      % Mehrsprachenumgebung, Hauptsprache Deutsch
+\usepackage{setspace}                    % Zeilenabstand
+\usepackage{latexsym}                    % Latex-Symbole
+\usepackage{amsfonts,amssymb,amstext}    % Mathematische Formeln
+\usepackage{bbm}                         % bbm Schriftart
+\usepackage{graphicx}                    % Abbildungen einbinden
+\usepackage{listings}					%Programmcode einbingen
+\usepackage{xcolor}						% Farben
+\usepackage{changepage}
+\usepackage{xparse}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usepackage{tikz}
+\usepackage{tikz-uml}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\replace}{mmm}
+{
+	\marian_replace:nnn {#1} {#2} {#3}
+}
+
+\tl_new:N \l_marian_input_text_tl
+
+\cs_new_protected:Npn \marian_replace:nnn #1 #2 #3
+{
+	\tl_set:Nn \l_marian_input_text_tl { #1 }
+	\tl_replace_all:Nnn \l_marian_input_text_tl { #2 } { #3 }
+	\tl_use:N \l_marian_input_text_tl
+}
+\ExplSyntaxOff
+
+
+\pagestyle{scrheadings}					% Kopfzeilen nach scr-Standard		
+
+% Definition von Befehlen, um die Vorlage nützlicher und verständlicher zu machen
+\newcommand{\codeind}[1]{\begin{adjustwidth}{3.5mm}{}#1\end{adjustwidth}}
+\usepackage{xparse}
+
+\NewDocumentCommand{\includecode}{m o o}{%
+  \codeind{\lstinputlisting[style=codestyle, language=Java, 
+    firstline=\IfValueTF{#2}{#2}{1}, 
+    lastline=\IfValueTF{#3}{#3}{2000}]{"src/#1"}}}
+
+\newcommand{\includecodewithfilename}[1]{Datei: \texttt{\replace{#1}{_}{\_}}\vspace*{-1.5mm}\includecode{#1}}
+\newcommand{\ownline}{\vspace{.7em}\hrule\vspace{.7em}} 
+\newcommand{\aufgabe}[1]{\section*{Aufgabe #1}}
+
+% Definition von Farben für die Codeblöcke
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{bgcolour}{rgb}{0.97,0.97,0.97}
+\definecolor{codered}{rgb}{0.7, 0.13, 0.13}
+
+% Definition eines Designs für die Codeblöcke
+\lstdefinestyle{codestyle}{
+	backgroundcolor=\color{bgcolour},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codeblue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codered},
+	basicstyle=\ttfamily,
+	numberstyle=\ttfamily\tiny\color{codegray},
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,
+	extendedchars=true                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4	
+}
+
+% Erlaubt es uns, in Codeblöcken Umlaute zu verwenden
+\lstset{literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+
+
+\parindent0em
+
+\begin{document}
+
+% Kopf des Dokuments
+\includegraphics[width=0.90\textwidth]{images/logo.png} \\
+\textbf{Übung zur Vorlesung Informatik 2} \hfill{SoSe 2025} \\  
+Fakultät für Angewandte Informatik \\
+Institut für Informatik \\
+\textsc{Prof. B. Bauer, J. Linne, V. Le Claire, F. Stieler} \\
+\mbox{} \\
+{\large Übungsgruppe 99} % Nummer der Übungsgruppe einfügen
+\ownline
+\begin{center}
+	{\LARGE \textbf{Abgabe des 4. Übungsblatts}} \\ % Nummer des Blatts einfügen
+	\mbox{} \\
+	{\large Jonathan Ehrenwirth, Michael Kraus, Florian Wissel} \\ % Namen der Teammitglieder einfügen
+\end{center}
+\ownline
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% AB HIER BEARBEITEN %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\teilaufgabe}[1]{\medskip\subsection*{Zu #1)}\medskip}
+
+\aufgabe{13}
+
+Das folgende Listing zeigt die Implementierung einer Programmklasse mit allen entsprechend der Teilaufgaben geforderten, überladenen Methoden.
+\includecodewithfilename{Aufgabe13/Aufgabe13.java}
+
+\aufgabe{14}
+
+Das folgende Listing zeigt die Implementierung einer Programmklasse, die die Datei \texttt{numbers.txt} einliest und ein zweidimensionales Array daraus erstellt.
+\includecodewithfilename{Aufgabe14/Aufgabe14.java}
+
+\aufgabe{15}
+
+\teilaufgabe{a}
+\includecodewithfilename{Aufgabe15/Aufgabe15a.java}
+
+\teilaufgabe{b}
+\includecodewithfilename{Aufgabe15/Aufgabe15b.java}
+
+\teilaufgabe{c}
+\includecodewithfilename{Aufgabe15/Aufgabe15c.java}
+
+\aufgabe{16}
+
+\teilaufgabe{a}
+\includecodewithfilename{Aufgabe16/Aufgabe16a.java}
+
+\teilaufgabe{b}
+\includecodewithfilename{Aufgabe16/Aufgabe16b.java}
+
+\teilaufgabe{c}
+\includecodewithfilename{Aufgabe16/Aufgabe16c.java}
+
+\end{document}

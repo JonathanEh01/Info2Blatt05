@@ -12,7 +12,7 @@ public class Aufgabe18f {
 	Random rand = new Random();
 	int n = 1 + rand.nextInt(100);
 	
-	// TreeSet
+	// HashSet
 	HashSet<Integer> set = new HashSet<Integer>();
 	for (int i = 0; (i < n); ++i) {
 	    set.add(Integer.valueOf(1 + rand.nextInt(1000)));

@@ -114,7 +114,7 @@ Institut für Informatik \\
 {\large Übungsgruppe 99} % Nummer der Übungsgruppe einfügen
 \ownline
 \begin{center}
-	{\LARGE \textbf{Abgabe des 4. Übungsblatts}} \\ % Nummer des Blatts einfügen
+	{\LARGE \textbf{Abgabe des 5. Übungsblatts}} \\ % Nummer des Blatts einfügen
 	\mbox{} \\
 	{\large Jonathan Ehrenwirth, Michael Kraus, Florian Wissel} \\ % Namen der Teammitglieder einfügen
 \end{center}
@@ -126,36 +126,38 @@ Institut für Informatik \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\teilaufgabe}[1]{\medskip\subsection*{Zu #1)}\medskip}
 
-\aufgabe{13}
-
-Das folgende Listing zeigt die Implementierung einer Programmklasse mit allen entsprechend der Teilaufgaben geforderten, überladenen Methoden.
-\includecodewithfilename{Aufgabe13/Aufgabe13.java}
-
-\aufgabe{14}
-
-Das folgende Listing zeigt die Implementierung einer Programmklasse, die die Datei \texttt{numbers.txt} einliest und ein zweidimensionales Array daraus erstellt.
-\includecodewithfilename{Aufgabe14/Aufgabe14.java}
-
-\aufgabe{15}
+\aufgabe{17}
 
 \teilaufgabe{a}
-\includecodewithfilename{Aufgabe15/Aufgabe15a.java}
+
+Vereinfacht ausgedrückt besagt das Substitutionsprinzip, dass ein Objekt einer Unterklasse überall dort verwendet werden kann, wo seine Oberklasse als Typ erwartet wird. Also kann eine Variable vom Typ der Oberklasse den Inhalt eines Unterklassen-Objekts referenzieren. Begründet liegt dies darin, dass entsprechend der Vererbung jede Unterklasse über alle Attribute und Methoden ihrer Oberklasse verfügt und damit an der Variable vom Typ der Oberklasse keine Fehler bei Methodenaufrufen oder Attributabfragen auftreten können\footnote{Umgekehrt können Unterklassen noch andere Methoden bzw. Attribute enthalten als ihre Oberklassen, die Kehrrichtung der Aussage gilt daher ausdrücklich nicht.}. 
+
+Polymorphismus besagt, dass während der Kompilierung für ein Objekt noch nicht explizit bekannt sein muss, zu welchem Unterklassentyp sein Inhalt gehört. Erst bei der Programmausführung wird dann während der Laufzeit die Implementierung für den Typ des Inhalts beim Aufruf genutzt.
+
+Die \texttt{.with()}--Methode der Klasse \texttt{LocalDate} erwartet einen Eingabeparameter vom Typ \texttt{TemporalAdjuster}. Hierbei handelt es sich um ein Interface, nach dem Substitutionsprinzip kann also ein Eingabeparameter vom Typ jeder Klasse übergeben werden, die dieses Interface implementiert, da jede dieser Klassen über die \texttt{.adjustInto()}--Methode verfügt, mit der die \texttt{.with()}--Methode realisiert ist. Alle diese Klassen können diese Methode allerdings unterschiedlich implementieren. Während der Kompilierung wird daher entsprechend des Prinzips des Polymorphismus lediglich überprüft, ob für \texttt{TemporalAdjuster} die Methode \texttt{.adjustInto()} existiert. Während der Laufzeit wird dann erst die konkrete Implementierung entsprechend der Klasse, von deren Typ der Eingabeparameter übergeben wurde, verwendet (late binding).
 
 \teilaufgabe{b}
-\includecodewithfilename{Aufgabe15/Aufgabe15b.java}
 
-\teilaufgabe{c}
-\includecodewithfilename{Aufgabe15/Aufgabe15c.java}
+Schnittstellen sind Datentypen! Sobald eine Klasse K eine Schnittstelle S implementiert, ist jedes Objekt vom K auch vom Typ S. Entsprechend dem Substitutionsprinzip kann also ein Objekt vom Typ K überall dort verwendet werden, wo S als Typ erwartet wird. Die Methode \texttt{contains} der Klasse \texttt{String} erwartet einen Eingabetyp vom Typ \texttt{CharSequence}. Es können als Eingabeparameter also Objekte von allen Klassen übergeben werden, die diese Schnittstelle implementieren. Damit können dieser Methode Objekte sehr vieler verschiedener Klassen übergeben werden, und ohne dass letztere in einer hierarchischen Beziehung zueinander stehen müssen.
 
-\aufgabe{16}
+\aufgabe{18}
 
 \teilaufgabe{a}
-\includecodewithfilename{Aufgabe16/Aufgabe16a.java}
+\includecodewithfilename{Aufgabe18/Aufgabe18a.java}
 
 \teilaufgabe{b}
-\includecodewithfilename{Aufgabe16/Aufgabe16b.java}
+\includecodewithfilename{Aufgabe18/Aufgabe18b.java}
 
 \teilaufgabe{c}
-\includecodewithfilename{Aufgabe16/Aufgabe16c.java}
+\includecodewithfilename{Aufgabe18/Aufgabe18c.java}
+
+\teilaufgabe{d}
+\includecodewithfilename{Aufgabe18/Aufgabe18d.java}
+
+\teilaufgabe{e}
+\includecodewithfilename{Aufgabe18/Aufgabe18e.java}
+
+\teilaufgabe{f}
+\includecodewithfilename{Aufgabe18/Aufgabe18f.java}
 
 \end{document}
